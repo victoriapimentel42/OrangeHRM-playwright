@@ -7,8 +7,8 @@ export class Span{
     }
 
     async haveText(text){
-        const span = await this.page.locator('.oxd-input-field-error-message')
-        await expect(span).toHaveText(text)
+        const span = await this.page.locator('.oxd-input-field-error-message');
+        await expect(span).toHaveText(text);
     }
 
 }

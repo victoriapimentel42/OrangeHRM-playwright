@@ -1,0 +1,39 @@
+
+
+const { pool } = require('../database');
+const { faker } = require('@faker-js/faker');
+const { test, expect } = ('../support');
+const { EmployeesBD } = require('./employees');
+const bcrypt = require('bcrypt');
+
+
+export class UsersBd{
+
+    constructor(page){
+        this.page = page;
+        this.employeesBd = new EmployeesBD();
+        
+    }
+
+    async createUser(status){
+        const idEmployee = await this.employeesBd.createEmployee();
+        const userRole = 1;
+        const userName = faker.person.firstName();
+        const password = "#Admin123456";
+        const creatorId = 1;
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+
+        const [resultado] = await pool.execute(
+            `INSERT INTO ohrm_user (user_role_id,emp_number,user_name,user_password, status, created_by) VALUES (?,?,?,?,?,?)`, [userRole,idEmployee,userName,hashedPassword,status,creatorId]
+        );
+
+       return {
+        id: resultado.insertId,
+        username: userName,
+        password: password 
+        }
+
+    }
+}

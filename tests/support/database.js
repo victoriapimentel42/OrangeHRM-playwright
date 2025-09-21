@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const { faker } = require('@faker-js/faker');
 const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool ({
@@ -12,12 +13,19 @@ const pool = mysql.createPool ({
 
  async function executeSQL(sql){
     try{
-        const [rows]= await pool.execute(sql)
+        const [rows]= await pool.execute(sql);
         return rows
     }catch(error){
-        console.log('Erro ao executar Sql' + error)
+        console.log('Erro ao executar Sql' + error);
 
     }
-}
+ }
 
- module.exports ={executeSQL}
+
+module.exports = {
+    executeSQL,
+    pool
+};
+
+
+

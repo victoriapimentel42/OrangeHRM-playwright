@@ -4,4 +4,4 @@ export const loginLocator = {
     passwordInput: 'Password',
     buttonForm: {role: 'button', name: 'Login'},
     alert: '.oxd-alert-action'
-}
+};
