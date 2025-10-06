@@ -3,7 +3,7 @@
 const { pool } = require('../database');
 const { faker } = require('@faker-js/faker');
 const { test, expect } = ('../support');
-const { EmployeesBD } = require('./employees');
+const { EmployeesBd } = require('./EmployeesBd');
 const bcrypt = require('bcrypt');
 
 
@@ -11,12 +11,13 @@ export class UsersBd{
 
     constructor(page){
         this.page = page;
-        this.employeesBd = new EmployeesBD();
+        this.employeesBd = new EmployeesBd();
         
     }
 
     async createUser(status){
-        const idEmployee = await this.employeesBd.createEmployee();
+        const employee = await this.employeesBd.createEmployee();
+        const idEmployee = employee.id;
         const userRole = 1;
         const userName = faker.person.firstName();
         const password = "#Admin123456";
