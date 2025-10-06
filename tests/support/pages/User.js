@@ -10,7 +10,6 @@ export class User{
     }
 
     async createUser(employeeName, userName, password){
-        await this.page.locator(usersLocator.addButton).click();
         const title = await this.page.locator(usersLocator.registration_tile);
         expect(title).toBeVisible();
 
@@ -21,12 +20,10 @@ export class User{
         await this.page.locator(usersLocator.option_role, { hasText: 'Enabled' }).click();
 
         await this.page.getByPlaceholder(usersLocator.placeholder_employee).fill(employeeName);
-        await this.page.locator(usersLocator.option_employee,{ hasText: employeeName }).click();
+        await expect(this.page.locator(usersLocator.option_employee)).toHaveText(employeeName);
+        await this.page.locator(usersLocator.option_employee).click();
 
-  
-        const inputUser = await this.page.locator(usersLocator.input_userName);
-        await inputUser.focus();
-        await inputUser.fill(userName);
+        await this.fillUserName(userName);
 
         const inputPassword = await this.page.locator(usersLocator.input_password).nth(0);
         await inputPassword.fill(password);
@@ -36,11 +33,25 @@ export class User{
 
         await this.submitForm();
 
+    }
 
+    async fillEmployeeName(employeeName){
+        await this.page.getByPlaceholder(usersLocator.placeholder_employee).fill(employeeName);
+        await this.page.locator(usersLocator.option_employee).click();
+    }
+
+    async fillUserName(userName){
+        const inputUser = await this.page.locator(usersLocator.input_userName);
+        await inputUser.focus();
+        await inputUser.fill(userName);
     }
 
     async submitForm(){
 
         await this.page.locator(usersLocator.button_submit).click();
+    }
+
+    async goToForm(){
+        await this.page.locator(usersLocator.addButton).click();
     }
 }

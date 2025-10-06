@@ -387,4 +387,3 @@
 | **ENTÃO** a mensagem "Invalid" será exibida para o campo "Employee Name"
 ---
 
-// caso de teste para limpar pesquisa
