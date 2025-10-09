@@ -22,23 +22,17 @@ test.describe('Cadastro de usuário', () => {
         await page.user.goToForm();
 
         const employee = await page.employeesBd.createEmployee();
-        const userName = faker.string.alpha({length: 10});
-        const prefixo = '#A';
-        const text = faker.string.alphanumeric(10);
-        const password = `${prefixo}${text}`;
         const employeeName = `${employee.firstName} ${employee.lastName}`;
+        const userName = faker.string.alpha({length: 10});
 
+        const password = faker.internet.password({length: 10, prefix:'#A1'});
+        
         await page.user.createUser(employeeName,userName, password,password);
 
-        const collum = page.locator(usersLocator.collum_admin);
-        await page.waitForSelector(usersLocator.collum_admin);
-        const rows = page.locator(usersLocator.row_admin);
-        const row = rows.last();
+        await page.waitForSelector(usersLocator.row_admin);
+        const row = page.locator(usersLocator.row_admin, {hasText: userName});
 
-        const adminName = row.locator(collum).nth(1);
-
-        await expect(adminName).toHaveText(userName);
-        await expect(adminName).toBeVisible(userName);
+        await expect(row).toBeVisible();
 
 
 
@@ -98,22 +92,16 @@ test.describe('Cadastro de usuário', () => {
 
         const employee = await page.employeesBd.createEmployee();
         const userName = faker.string.alpha(5);
-        const prefixo = '#A';
-        const text = faker.string.alphanumeric(10);
-        const password = `${prefixo}${text}`;
         const employeeName = `${employee.firstName} ${employee.lastName}`;
+
+        const password = faker.internet.password({length: 10, prefix:'#A1'});
 
         await page.user.createUser(employeeName,userName, password,password);
 
-        const collum = page.locator(usersLocator.collum_admin);
-        await page.waitForSelector(usersLocator.collum_admin);
-        const rows = page.locator(usersLocator.row_admin);
-        const row = rows.last();
+        await page.waitForSelector(usersLocator.row_admin);
+        const row = page.locator(usersLocator.row_admin, {hasText: userName});
 
-        const adminName = row.locator(collum).nth(1);
-
-        await expect(adminName).toHaveText(userName);
-        await expect(adminName).toBeVisible(userName);
+        await expect(row).toBeVisible();
     })
 
 });

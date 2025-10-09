@@ -41,7 +41,7 @@ export class User{
     }
 
     async fillUserName(userName){
-        const inputUser = await this.page.locator(usersLocator.input_userName);
+        const inputUser = await this.page.locator(usersLocator.input_userName, {hasText: 'Username'}).locator('input');
         await inputUser.focus();
         await inputUser.fill(userName);
     }

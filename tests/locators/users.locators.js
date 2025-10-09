@@ -6,10 +6,10 @@ export const usersLocator = {
     option_role: ".oxd-select-option", 
     placeholder_employee: "Type for hints...",
     option_employee: ".oxd-autocomplete-option",
-    input_userName: 'div.oxd-input-group:has(label:text("Username")) input',
+    input_userName: 'div.oxd-input-group',
     input_password: 'input[type="password"]',
     button_submit: 'button[type="submit"]',
-    row_admin: '.oxd-table-row--with-border',
-    collum_admin: '.oxd-padding-cell'
+    row_admin: '.oxd-table-row',
+
 
 }
