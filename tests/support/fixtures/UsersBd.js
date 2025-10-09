@@ -19,7 +19,7 @@ export class UsersBd{
         const employee = await this.employeesBd.createEmployee();
         const idEmployee = employee.id;
         const userRole = 1;
-        const userName = faker.person.firstName();
+        const userName = faker.person.fullName();
         const password = "#Admin123456";
         const creatorId = 1;
 
@@ -33,7 +33,8 @@ export class UsersBd{
        return {
         id: resultado.insertId,
         username: userName,
-        password: password 
+        password: password,
+        userName: userName 
         }
 
     }

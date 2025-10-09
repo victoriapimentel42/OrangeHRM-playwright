@@ -25,11 +25,7 @@ export class User{
 
         await this.fillUserName(userName);
 
-        const inputPassword = await this.page.locator(usersLocator.input_password).nth(0);
-        await inputPassword.fill(password);
-
-        const confirmPassword = await this.page.locator(usersLocator.input_password).nth(1);
-        await confirmPassword.fill(password);
+        await this.fillPasswords(password);
 
         await this.submitForm();
 
@@ -46,6 +42,14 @@ export class User{
         await inputUser.fill(userName);
     }
 
+    async fillPasswords(password){
+        const inputPassword = await this.page.locator(usersLocator.input_password).nth(0);
+        await inputPassword.fill(password);
+
+        const confirmPassword = await this.page.locator(usersLocator.input_password).nth(1);
+        await confirmPassword.fill(password);
+    }
+    
     async submitForm(){
 
         await this.page.locator(usersLocator.button_submit).click();
