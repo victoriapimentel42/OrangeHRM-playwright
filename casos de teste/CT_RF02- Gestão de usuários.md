@@ -279,14 +279,14 @@
 | **DADO** que o usuário esteja na tela de gerenciar usuários             |
 | **E** clique na opção de exclusão            |
 |**QUANDO** confirmar a ação de exclusão|
-| **ENTÃO** o usuário não deve aparecer na listagem e a mensagem "Successfully Deleted" deve ser exibida
+| **ENTÃO** o usuário não deve aparecer na listagem de admin
 ---
 
-### Caso 17: Edição de password do usuário
+### Caso 17: Edição de cargo do usuário
 
 | ID       | Descrição                                                |
 | :------- | :------------------------------------------------------- |
-| RF02-C17 | Deve ser possível editar a senha de um usuário
+| RF02-C17 | Deve ser possível editar o cargo de um usuário
 
 | **Pré-condições**                                             |
 | :------------------------------------------------------------ |
@@ -296,14 +296,217 @@
 | :---------------------------------------------------------------- |
 | **DADO** que o usuário esteja na tela de gerenciar usuários             |
 | **E** clique na opção de edição            |
-|**QUANDO** habilitar opção de "change password"|
-| **ENTÃO** os campos "password" e "confirm password" devem aparecer vazios e disponiveis para edição
+| **E** altere o valor do campo User Role para um novo cargo            |
+|**QUANDO** clicar no botão "Save"|
+| **ENTÃO** o novo cargo deve ser exibido na listagem de admin
 ---
 
-### Caso 18: Busca de usuário pelo username
+### Caso 18: Edição de status do usuário
+
 | ID       | Descrição                                                |
 | :------- | :------------------------------------------------------- |
-| RF02-C18 | Deve ser possível pesquisar por um usuário pelo username
+| RF02-C18 | Deve ser possível editar o status de um usuário
+
+| **Pré-condições**                                             |
+| :------------------------------------------------------------ |
+| Usuário a ser editado deve estar cadastrado no sistema|
+
+| **Passos**                                                        |
+| :---------------------------------------------------------------- |
+| **DADO** que o usuário esteja na tela de gerenciar usuários             |
+| **E** clique na opção de edição            |
+| **E** altere o status de cadastro           |
+|**QUANDO** clicar no botão "Save"|
+|**ENTÃO** o novo status deve ser exibido na listagem de admin
+---
+
+### Caso 19: Edição de username do usuário
+
+| ID       | Descrição                                                |
+| :------- | :------------------------------------------------------- |
+| RF02-C19 | Deve ser possível editar o username de um usuário
+
+| **Pré-condições**                                             |
+| :------------------------------------------------------------ |
+| Usuário a ser editado deve estar cadastrado no sistema|
+
+| **Passos**                                                        |
+| :---------------------------------------------------------------- |
+| **DADO** que o usuário esteja na tela de gerenciar usuários             |
+| **E** clique na opção de edição            |
+| **E** altere o username do usuário com um valor válido          |
+|**QUANDO** clicar no botão "Save"|
+|**ENTÃO** o novo username deve ser exibido na listagem de admin
+---
+
+### Caso 20: Edição inválida do campo user name (uso de caracteres abaixo do permitido)
+
+| ID       | Descrição                                                |
+| :------- | :------------------------------------------------------- |
+| RF02-C20 | Não deve ser possível editar o username de um usuário com menos de 5 caracteres
+
+| **Pré-condições**                                             |
+| :------------------------------------------------------------ |
+| Usuário a ser editado deve estar cadastrado no sistema|
+
+| **Passos**                                                        |
+| :---------------------------------------------------------------- |
+| **DADO** que o usuário esteja na tela de gerenciar usuários             |
+| **E** clique na opção de edição            |
+|**QUANDO** alterar o campo username do usuário para um valor com menos de 5 caracteres |
+|**ENTÃO** será exibida a mensagem "Should be at least 5 characters" para o campo
+---
+
+
+### Caso 21: Edição inválida do campo user name (uso de caracteres acima do permitido)
+
+| ID       | Descrição                                                |
+| :------- | :------------------------------------------------------- |
+| RF02-C21 | Não deve ser possível editar o username de um usuário com mais de 40 caracteres
+
+| **Pré-condições**                                             |
+| :------------------------------------------------------------ |
+| Usuário a ser editado deve estar cadastrado no sistema|
+
+| **Passos**                                                        |
+| :---------------------------------------------------------------- |
+| **DADO** que o usuário esteja na tela de gerenciar usuários             |
+| **E** clique na opção de edição            |
+|**QUANDO** alterar o campo username do usuário para um valor com mais de 40 caracteres |
+|**ENTÃO** será exibida a mensagem "Should not exceed 40 characters" para o campo
+---
+
+### Caso 22: Edição de password do usuário
+
+| ID       | Descrição                                                |
+| :------- | :------------------------------------------------------- |
+| RF02-C22 | Deve ser possível editar a senha de um usuário
+
+| **Pré-condições**                                             |
+| :------------------------------------------------------------ |
+| Usuário a ser editado deve estar cadastrado no sistema|
+
+| **Passos**                                                        |
+| :---------------------------------------------------------------- |
+| **DADO** que o usuário esteja na tela de gerenciar usuários             |
+| **E** clique na opção de edição            |
+| **E** habilite a opção "change password"            |
+|**QUANDO** alterar a senha com valores válidos|
+| **ENTÃO** usuario editado deve conseguir se logar com nova senha
+---
+
+### Caso 23: Edição inválida de password do usuário (uso de caracteres abaixo do minimo permitido)
+
+| ID       | Descrição                                                |
+| :------- | :------------------------------------------------------- |
+| RF02-C23 | Não deve ser possível editar a senha de um usuário
+
+| **Pré-condições**                                             |
+| :------------------------------------------------------------ |
+| Usuário a ser editado deve estar cadastrado no sistema|
+
+| **Passos**                                                        |
+| :---------------------------------------------------------------- |
+| **DADO** que o usuário esteja na tela de gerenciar usuários             |
+| **E** clique na opção de edição            |
+|**QUANDO** preencher o campo password com menos de 8 caracteres|
+| **ENTÃO** a mensagem "Should have at least 8 characters" será exibida para o campo
+---
+
+### Caso 24: Edição inválida de password do usuário (uso de caracteres acima do minimo permitido)
+
+| ID       | Descrição                                                |
+| :------- | :------------------------------------------------------- |
+| RF02-C24 | Não deve ser possível editar a senha de um usuário
+
+| **Pré-condições**                                             |
+| :------------------------------------------------------------ |
+| Usuário a ser editado deve estar cadastrado no sistema|
+
+| **Passos**                                                        |
+| :---------------------------------------------------------------- |
+| **DADO** que o usuário esteja na tela de gerenciar usuários             |
+| **E** clique na opção de edição            |
+|**QUANDO** preencher o campo password com mais de 64 caracteres|
+| **ENTÃO** a mensagem "Should not exceed 64 characters" será exibida para o campo
+---
+
+### Caso 25: Edição inválida de password do usuário - (campo password sem caractere especial)
+
+| ID       | Descrição                                                |
+| :------- | :------------------------------------------------------- |
+| RF02-C25 | Não deve ser possível editar a senha de um usuário
+
+| **Pré-condições**                                             |
+| :------------------------------------------------------------ |
+| Usuário a ser editado deve estar cadastrado no sistema|
+
+| **Passos**                                                        |
+| :---------------------------------------------------------------- |
+| **DADO** que o usuário esteja na tela de gerenciar usuários             |
+| **E** clique na opção de edição            |
+|**QUANDO** preencher o campo password sem um caractere especial|
+| **ENTÃO** a mensagem "Your password must contain minimum 1 special character" será exibida para o campo
+---
+
+### Caso 26: Edição inválida de password do usuário - (campo password sem números)
+
+| ID       | Descrição                                                |
+| :------- | :------------------------------------------------------- |
+| RF02-C26 | Não deve ser possível editar a senha de um usuário
+
+| **Pré-condições**                                             |
+| :------------------------------------------------------------ |
+| Usuário a ser editado deve estar cadastrado no sistema|
+
+| **Passos**                                                        |
+| :---------------------------------------------------------------- |
+| **DADO** que o usuário esteja na tela de gerenciar usuários             |
+| **E** clique na opção de edição            |
+|**QUANDO** preencher o campo password sem um número|
+| **ENTÃO** a mensagem "Your password must contain minimum 1 number" será exibida para o campo
+---
+
+### Caso 27: Edição inválida de password do usuário - (campo password sem letra maiúscula)
+
+| ID       | Descrição                                                |
+| :------- | :------------------------------------------------------- |
+| RF02-C27 | Não deve ser possível editar a senha de um usuário
+
+| **Pré-condições**                                             |
+| :------------------------------------------------------------ |
+| Usuário a ser editado deve estar cadastrado no sistema|
+
+| **Passos**                                                        |
+| :---------------------------------------------------------------- |
+| **DADO** que o usuário esteja na tela de gerenciar usuários             |
+| **E** clique na opção de edição            |
+|**QUANDO** preencher o campo password sem uma letra maiúscula|
+| **ENTÃO** a mensagem "Your password must contain minimum 1 upper-case letter" será exibida para o campo
+---
+
+### Caso 28: Edição inválida de password do usuário - (senhas diferentes)
+
+| ID       | Descrição                                                |
+| :------- | :------------------------------------------------------- |
+| RF02-C28 | Não deve ser possível editar a senha de um usuário
+
+| **Pré-condições**                                             |
+| :------------------------------------------------------------ |
+| Usuário a ser editado deve estar cadastrado no sistema|
+
+| **Passos**                                                        |
+| :---------------------------------------------------------------- |
+| **DADO** que o usuário esteja na tela de gerenciar usuários             |
+| **E** clique na opção de edição            |
+|**QUANDO** preencher o campo "confirm Password" com valor diferente|
+| **ENTÃO** a mensagem "Passwords do not match" será exibida para o campo confirm password
+---
+
+### Caso 29: Busca de usuário pelo username
+| ID       | Descrição                                                |
+| :------- | :------------------------------------------------------- |
+| RF02-C29 | Deve ser possível pesquisar por um usuário pelo username
 
 | **Pré-condições**                                             |
 | :------------------------------------------------------------ |
@@ -318,10 +521,10 @@
 ---
 
 
-### Caso 19: Busca de usuário pela função
+### Caso 30: Busca de usuário pela função
 | ID       | Descrição                                                |
 | :------- | :------------------------------------------------------- |
-| RF02-C19 | Deve ser possível pesquisar um usuário pela função
+| RF02-C30 | Deve ser possível pesquisar um usuário pela função
 
 | **Pré-condições**                                             |
 | :------------------------------------------------------------ |
@@ -336,10 +539,10 @@
 ---
 
 
-### Caso 20: Busca de usuário pelo status de cadastro
+### Caso 31 : Busca de usuário pelo status de cadastro
 | ID       | Descrição                                                |
 | :------- | :------------------------------------------------------- |
-| RF02-C20 | Deve ser possível pesquisar um usuário pelo status de cadastro
+| RF02-C31 | Deve ser possível pesquisar um usuário pelo status de cadastro
 
 | **Pré-condições**                                             |
 | :------------------------------------------------------------ |
@@ -353,10 +556,10 @@
 | **ENTÃO** todos os usuários exibidos na lista de resultados devem ter o status de cadastro selecionado
 ---
 
-### Caso 21: Busca com sucesso- pesquisa pelo nome do funcionário
+### Caso 32: Busca com sucesso- pesquisa pelo nome do funcionário
 | ID       | Descrição                                                |
 | :------- | :------------------------------------------------------- |
-| RF02-C21 | Deve ser possível pesquisar um usuário pelo nome real
+| RF02-C32 | Deve ser possível pesquisar um usuário pelo nome real
 
 | **Pré-condições**                                             |
 | :------------------------------------------------------------ |
@@ -370,10 +573,10 @@
 | **ENTÃO** o usuário pesquisado deve aparecer na lista de resultados
 ---
 
-### Caso 22: Busca inválida- nome de funcionário não cadastrado
+### Caso 33: Busca inválida- nome de funcionário não cadastrado
 | ID       | Descrição                                                |
 | :------- | :------------------------------------------------------- |
-| RF02-C22 | Não deve ser possível pesquisar pelo nome de um funcionário que não esteja cadastrado
+| RF02-C33 | Não deve ser possível pesquisar pelo nome de um funcionário que não esteja cadastrado
 
 | **Pré-condições**                                             |
 | :------------------------------------------------------------ |
