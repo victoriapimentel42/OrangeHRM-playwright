@@ -174,4 +174,101 @@ test.describe('Cadastro de usuário', () => {
         await page.span.haveText('Should have at least 8 characters');
     });
 
+    test('Caso 10: Cadastro inválido - campo password com número de caracteres acima do limite permitido', async({page}) => {
+
+        await page.login.visit();
+        await page.login.do(admin.userName, admin.password);
+        await page.dashboard.isLoggedIn()
+        await page.dashboard.goToSystemUsers();
+
+        await page.user.goToForm();
+
+        const password = faker.internet.password({length: 65});
+        await page.user.fillPasswords(password, password);
+
+        await page.span.haveText('Should not exceed 64 characters');
+
+    });
+
+    test('Caso 11: Cadastro inválido - campo password sem caractere especial', async({page})=> {
+
+        await page.login.visit();
+        await page.login.do(admin.userName, admin.password);
+        await page.dashboard.isLoggedIn()
+        await page.dashboard.goToSystemUsers();
+
+        await page.user.goToForm();
+
+        const password = faker.internet.password({length: 10, prefix:'A1'});
+        await page.user.fillPasswords(password, password);
+
+        await page.span.haveText('Your password must contain minimum 1 special character');
+
+    });
+
+    test('Caso 12: Cadastro inválido - campo password sem números', async({page}) => {
+
+        await page.login.visit();
+        await page.login.do(admin.userName, admin.password);
+        await page.dashboard.isLoggedIn()
+        await page.dashboard.goToSystemUsers();
+
+        await page.user.goToForm();
+
+        const password = faker.internet.password({length: 10, pattern: /[a-z]/ ,prefix:'#A'});
+        await page.user.fillPasswords(password, password);
+
+        await page.span.haveText('Your password must contain minimum 1 number');
+    });
+
+    test('Caso 13: Cadastro inválido - campo password sem letra maiúscula', async({page}) => {
+
+        await page.login.visit();
+        await page.login.do(admin.userName, admin.password);
+        await page.dashboard.isLoggedIn()
+        await page.dashboard.goToSystemUsers();
+
+        await page.user.goToForm();
+
+        const password = faker.internet.password({length: 10, pattern: /[a-z]/, prefix:'#1'});
+        await page.user.fillPasswords(password, password);
+
+        await page.span.haveText('Your password must contain minimum 1 upper-case letter');
+
+    });
+
+    test('Caso 14: Cadastro inválido - campo password com requisitos mínimos', async({page}) => {
+
+        await page.login.visit();
+        await page.login.do(admin.userName, admin.password);
+        await page.dashboard.isLoggedIn()
+        await page.dashboard.goToSystemUsers();
+
+        await page.user.goToForm();
+
+        const password = faker.internet.password({length: 8, prefix:'#A1'});
+        await page.user.fillPasswords(password, password);
+
+        await page.span.haveText('Your password meets the minimum requirements, but it could be guessable');
+
+    });
+
+    test('Caso 15: Cadastro inválido - senhas diferentes', async({page}) => {
+
+        await page.login.visit();
+        await page.login.do(admin.userName, admin.password);
+        await page.dashboard.isLoggedIn()
+        await page.dashboard.goToSystemUsers();
+
+        await page.user.goToForm();
+
+        const password = faker.internet.password({length: 10, prefix:'#A1'});
+        const password2 = faker.internet.password({length: 11, prefix:'#A1'});
+        await page.user.fillPasswords(password, password2);
+
+        await page.span.haveText('Passwords do not match');
+
+    });
+
+
 });

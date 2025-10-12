@@ -9,7 +9,7 @@ export class User{
         this.page = page;
     }
 
-    async createUser(employeeName, userName, password){
+    async createUser(employeeName, userName, password, password2){
         const title = await this.page.locator(usersLocator.registration_tile);
         expect(title).toBeVisible();
 
@@ -25,7 +25,7 @@ export class User{
 
         await this.fillUserName(userName);
 
-        await this.fillPasswords(password);
+        await this.fillPasswords(password, password2);
 
         await this.submitForm();
 
@@ -42,12 +42,12 @@ export class User{
         await inputUser.fill(userName);
     }
 
-    async fillPasswords(password){
+    async fillPasswords(password, password2){
         const inputPassword = await this.page.locator(usersLocator.input_password).nth(0);
         await inputPassword.fill(password);
 
         const confirmPassword = await this.page.locator(usersLocator.input_password).nth(1);
-        await confirmPassword.fill(password);
+        await confirmPassword.fill(password2);
     }
     
     async submitForm(){
