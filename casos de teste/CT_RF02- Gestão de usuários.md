@@ -399,7 +399,7 @@
 
 | ID       | Descrição                                                |
 | :------- | :------------------------------------------------------- |
-| RF02-C23 | Não deve ser possível editar a senha de um usuário
+| RF02-C23 | Não deve ser possível editar a senha de um usuário com menos de 8 caracteres
 
 | **Pré-condições**                                             |
 | :------------------------------------------------------------ |
@@ -409,15 +409,16 @@
 | :---------------------------------------------------------------- |
 | **DADO** que o usuário esteja na tela de gerenciar usuários             |
 | **E** clique na opção de edição            |
+| **E** habilite a opção "change password"            |
 |**QUANDO** preencher o campo password com menos de 8 caracteres|
 | **ENTÃO** a mensagem "Should have at least 8 characters" será exibida para o campo
 ---
 
-### Caso 24: Edição inválida de password do usuário (uso de caracteres acima do minimo permitido)
+### Caso 24: Edição inválida de password do usuário (uso de caracteres acima do maximo permitido)
 
 | ID       | Descrição                                                |
 | :------- | :------------------------------------------------------- |
-| RF02-C24 | Não deve ser possível editar a senha de um usuário
+| RF02-C24 | Não deve ser possível editar a senha de um usuário com mais de 64 caracteres
 
 | **Pré-condições**                                             |
 | :------------------------------------------------------------ |
@@ -427,6 +428,7 @@
 | :---------------------------------------------------------------- |
 | **DADO** que o usuário esteja na tela de gerenciar usuários             |
 | **E** clique na opção de edição            |
+| **E** habilite a opção "change password"            |
 |**QUANDO** preencher o campo password com mais de 64 caracteres|
 | **ENTÃO** a mensagem "Should not exceed 64 characters" será exibida para o campo
 ---
@@ -435,7 +437,7 @@
 
 | ID       | Descrição                                                |
 | :------- | :------------------------------------------------------- |
-| RF02-C25 | Não deve ser possível editar a senha de um usuário
+| RF02-C25 | Não deve ser possível editar a senha de um usuário sem caractere especial
 
 | **Pré-condições**                                             |
 | :------------------------------------------------------------ |
@@ -445,6 +447,7 @@
 | :---------------------------------------------------------------- |
 | **DADO** que o usuário esteja na tela de gerenciar usuários             |
 | **E** clique na opção de edição            |
+| **E** habilite a opção "change password"            |
 |**QUANDO** preencher o campo password sem um caractere especial|
 | **ENTÃO** a mensagem "Your password must contain minimum 1 special character" será exibida para o campo
 ---
@@ -453,7 +456,7 @@
 
 | ID       | Descrição                                                |
 | :------- | :------------------------------------------------------- |
-| RF02-C26 | Não deve ser possível editar a senha de um usuário
+| RF02-C26 | Não deve ser possível editar a senha de um usuário que não tenha números
 
 | **Pré-condições**                                             |
 | :------------------------------------------------------------ |
@@ -463,6 +466,7 @@
 | :---------------------------------------------------------------- |
 | **DADO** que o usuário esteja na tela de gerenciar usuários             |
 | **E** clique na opção de edição            |
+| **E** habilite a opção "change password"            |
 |**QUANDO** preencher o campo password sem um número|
 | **ENTÃO** a mensagem "Your password must contain minimum 1 number" será exibida para o campo
 ---
@@ -471,7 +475,7 @@
 
 | ID       | Descrição                                                |
 | :------- | :------------------------------------------------------- |
-| RF02-C27 | Não deve ser possível editar a senha de um usuário
+| RF02-C27 | Não deve ser possível editar a senha de um usuário que não possui letra maiúscula
 
 | **Pré-condições**                                             |
 | :------------------------------------------------------------ |
@@ -481,6 +485,7 @@
 | :---------------------------------------------------------------- |
 | **DADO** que o usuário esteja na tela de gerenciar usuários             |
 | **E** clique na opção de edição            |
+| **E** habilite a opção "change password"            |
 |**QUANDO** preencher o campo password sem uma letra maiúscula|
 | **ENTÃO** a mensagem "Your password must contain minimum 1 upper-case letter" será exibida para o campo
 ---
@@ -489,7 +494,7 @@
 
 | ID       | Descrição                                                |
 | :------- | :------------------------------------------------------- |
-| RF02-C28 | Não deve ser possível editar a senha de um usuário
+| RF02-C28 | Não deve ser possível editar a senha de um usuário quando as mesmas são diferentes
 
 | **Pré-condições**                                             |
 | :------------------------------------------------------------ |
@@ -499,6 +504,7 @@
 | :---------------------------------------------------------------- |
 | **DADO** que o usuário esteja na tela de gerenciar usuários             |
 | **E** clique na opção de edição            |
+| **E** habilite a opção "change password"            |
 |**QUANDO** preencher o campo "confirm Password" com valor diferente|
 | **ENTÃO** a mensagem "Passwords do not match" será exibida para o campo confirm password
 ---
