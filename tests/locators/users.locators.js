@@ -10,6 +10,9 @@ export const usersLocator = {
     input_password: 'input[type="password"]',
     button_submit: 'button[type="submit"]',
     row_admin: '.oxd-table-row',
+    button_remove: '.bi-trash',
+    removal_confirmation: '.orangehrm-button-margin',
+    confirmation_modal: '.orangehrm-modal-header'
 
 
 }

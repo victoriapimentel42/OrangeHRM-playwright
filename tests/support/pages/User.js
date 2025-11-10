@@ -3,7 +3,9 @@ import { usersLocator } from "../../locators/users.locators";
 
 
 
+
 export class User{
+
 
     constructor(page){
         this.page = page;
@@ -57,5 +59,24 @@ export class User{
 
     async goToForm(){
         await this.page.locator(usersLocator.addButton).click();
+    }
+
+    async removeUser(userName){
+
+        const row = await this.page.locator(usersLocator.row_admin, {hasText: userName});
+
+        const button = row.locator(usersLocator.button_remove);
+        await button.click();
+
+        const modal = await this.page.locator(usersLocator.confirmation_modal);
+        await expect(modal).toBeVisible();
+
+        const removal_confirmation = await this.page.locator(usersLocator.removal_confirmation).nth(1);
+        await expect(removal_confirmation).toBeVisible();
+        await removal_confirmation.click();
+
+        await this.page.waitForSelector(usersLocator.row_admin);
+        await expect(row).not.toBeVisible();
+
     }
 }

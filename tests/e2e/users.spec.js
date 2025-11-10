@@ -9,9 +9,10 @@ test.beforeAll(async() => {
     await executeSQL(`DELETE FROM hs_hr_employee where emp_number <> 1`);
  });
 
+ const admin = data.main_user;
+
 test.describe('Cadastro de usuário', () => {
 
-    const admin = data.main_user;
     test('Caso 01: Cadastro de usuário com sucesso', async({page}) => {
 
         await page.login.visit();
@@ -269,6 +270,27 @@ test.describe('Cadastro de usuário', () => {
         await page.span.haveText('Passwords do not match');
 
     });
+
+
+});
+
+
+    test('Exclusão de usuário', async({page}) =>{
+        
+        const user = await page.usersBd.createUser(1);
+
+        await page.login.visit();
+        await page.login.do(admin.userName, admin.password);
+        await page.dashboard.isLoggedIn()
+        await page.dashboard.goToSystemUsers();
+
+        await page.waitForSelector(usersLocator.row_admin);
+        await page.user.removeUser(user.userName);
+
+
+    });
+
+test.describe('Edição de usuário', () => {
 
 
 });
