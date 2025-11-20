@@ -275,7 +275,7 @@ test.describe('Cadastro de usuário', () => {
 });
 
 
-    test('Exclusão de usuário', async({page}) =>{
+    test('Caso 16: Exclusão de usuário', async({page}) =>{
         
         const user = await page.usersBd.createUser(1);
 
@@ -292,5 +292,70 @@ test.describe('Cadastro de usuário', () => {
 
 test.describe('Edição de usuário', () => {
 
+    test('Caso 17: Edição do cargo de usuário', async({page}) =>{
+
+        const user = await page.usersBd.createUser(1);
+
+        await page.login.visit();
+        await page.login.do(admin.userName, admin.password);
+        await page.dashboard.isLoggedIn()
+        await page.dashboard.goToSystemUsers();
+
+        await page.user.openEditUser(user.userName);
+        await page.user.selectRole();
+        await page.user.submitForm();
+
+        await page.waitForSelector(usersLocator.row_admin);
+        const row = page.locator(usersLocator.row_admin, {hasText:user.userName});
+
+        const roleColumn = row.locator(usersLocator.row_role).nth(2);
+        await expect(roleColumn).toHaveText('ESS');
+
+    });
+
+    test('Caso 18: Edição de status do usuário', async({page}) => {
+
+        const user = await page.usersBd.createUser(1);
+
+        await page.login.visit();
+        await page.login.do(admin.userName, admin.password);
+        await page.dashboard.isLoggedIn()
+        await page.dashboard.goToSystemUsers();
+
+        await page.user.openEditUser(user.userName);
+        const status = 'Disabled';
+        await page.user.selectStatus(status);
+
+        await page.user.submitForm();
+
+        await page.waitForSelector(usersLocator.row_admin);
+        const row = page.locator(usersLocator.row_admin, {hasText:status});
+
+        await expect(row).toBeVisible();
+
+
+    });
+
+    test('Caso 19: Edição de username do usuário', async ({page}) =>{
+
+        const user = await page.usersBd.createUser(1);
+
+        await page.login.visit();
+        await page.login.do(admin.userName, admin.password);
+        await page.dashboard.isLoggedIn()
+        await page.dashboard.goToSystemUsers();
+
+        await page.user.openEditUser(user.userName);
+
+        const newName = faker.person.firstName();
+        await page.user.fillUserName(newName);
+        await page.user.submitForm();
+
+        await page.waitForSelector(usersLocator.row_admin);
+        const row = page.locator(usersLocator.row_admin, {hasText:newName});
+
+        await expect(row).toBeVisible();
+
+    });
 
 });
